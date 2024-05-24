@@ -31,7 +31,7 @@ python3 main/train.py --config_path config/04_adarand/rn50.yaml
 ## Citation
 ```
 @inproceedings{Yamaguchi_CVPR24_AdaRand,
-  title={Regularizing CNN transfer learning with randomised regression},
+  title={Adaptive Random Feature Regularization on Fine-tuning Deep Neural Networks},
   author={Yamaguchi, Shin'ya and Kanai, Sekitoshi and Adachi, Kazuki and Chijiwa, Daiki},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
   year={2024}
