@@ -1,0 +1,39 @@
+pattern: FT
+main: main/train.py
+batchsize: 64
+batchsize_noise: 64
+epoch: 200
+snapshot_interval: 1
+experiment_iterations: 3
+log_interval: 1
+train_val_split_ratio: 0.9
+log_metrics: ["feat_norm", "grad_norm", "feat_entropy"]
+
+models:
+  pattern: CLIP-ViT-B-16
+  classifier:
+    func: model/clip.py
+    name: ViT_B_16
+    args:
+      num_classes: 196
+      pretrained_path: ./pretrained/clip/vit-b-16.pt
+
+dataset:
+  dataset_func: data/generic.py
+  dataset_name: StanfordCars
+  args:
+    root: data/StanfordCars
+    test: False
+    size: 224
+
+optimizer_c:
+  algorithm: AdamW
+  lr_milestone: cosine
+  warmup: 50
+  args:
+    lr: 3.0e-5
+    weight_decay: 0.1
+    
+updater:
+  func: updater/classification.py
+  name: ClassifierUpdater

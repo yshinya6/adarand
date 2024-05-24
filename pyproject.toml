@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "adarand"
+version = "0.1.0"
+description = "Adaptive Random Feature Regularization on Fine-tuning Deep Neural Networks"
+authors = ["Shin'ya Yamaguchi <shinya.yamaguchi@ntt.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9.7"
+torch = "^2.0.1"
+torchvision = "^0.15.2"
+PyYAML = "^6.0"
+flake8 = "^4.0.1"
+autopep8 = "^1.6.0"
+mypy = "^0.960"
+pytorch-ignite = "^0.4.12"
+tqdm = "^4.64.0"
+scikit-learn = "^1.1.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

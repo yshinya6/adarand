@@ -1,0 +1,52 @@
+pattern: RandReg-GaussianPre
+main: main/train.py
+batchsize: 64
+batchsize_noise: 64
+epoch: 200
+snapshot_interval: 1
+experiment_iterations: 3
+log_interval: 1
+train_val_split_ratio: 0.9
+log_metrics: ["loss_pseudo", "feat_norm", "grad_norm", "feat_entropy"]
+
+models:
+  pattern: RN50
+  classifier:
+    func: model/resnet.py
+    name: ResNet50Feat
+    args:
+      num_classes: 196
+      pretrained: True
+      finetune: True
+  generator:
+    func: model/noise_generator.py
+    name: NoiseGenerator  
+    args:
+      ema_decay: 1.0
+      feat_dim: 2048
+      precomputed_stats: stats/marginal/cars_rn50.npz
+
+dataset:
+  dataset_func: data/generic.py
+  dataset_name: StanfordCars
+  args:
+    root: data/StanfordCars
+    test: False
+    size: 224
+
+optimizer_c:
+  algorithm: SGD
+  lr_milestone: [60, 120, 160]
+  lr_drop_rate: 0.1
+  args:
+    lr: 0.01
+    momentum: 0.9
+    nesterov: True
+
+updater:
+  func: updater/adarand.py
+  name: ClassifierUpdater
+  args:
+    lambda_reg: 1.0
+    ema_generator: True
+    num_classes: 196
